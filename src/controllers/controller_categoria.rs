@@ -1,7 +1,8 @@
 use models::obj::Categorias;
 use views::views_categoria::mostrar_categorias;
 use views::views_categoria::menu as Menu;
-
+use std::collections::HashMap;
+use std::io;
 fn controller_categoria() {
     Menu();
     match get_input().trim() {
@@ -15,9 +16,6 @@ fn controller_categoria() {
 
 
 fn agregar_categoria() {
-    // Lógica para agregar una categoría
-    println!("Agregar categoría");
-    
     let mut categorias = Categorias();
     categorias.insert("NT".to_string(), "Nutricion".to_string());
     return categorias;

@@ -5,3 +5,4 @@ fn agregar_categoria(){
     categoria.insert("NT".to_string(), "Nutricion".to_string());
     return categoria;
 }
+fn 

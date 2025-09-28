@@ -8,7 +8,5 @@ fn Categorias() {
         ("JG".to_string(), "Juguetes".to_string()),
         ("DP".to_string(), "Deportes".to_string()),
     ]);
-
-
     return categorias;
 }
