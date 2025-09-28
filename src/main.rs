@@ -1,3 +1,3 @@
 fn main() {
-    println!("uwu");
+    println!("Peron hsetsto");
 }
