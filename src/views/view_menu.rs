@@ -1,4 +1,3 @@
-use std::io;
 pub fn menu_principal(){
     println!("--- Menu Principal ---");
     println!("1. Categorias");
