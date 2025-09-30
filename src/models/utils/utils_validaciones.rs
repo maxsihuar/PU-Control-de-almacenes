@@ -1,4 +1,3 @@
-use crate::src::controllers::controller_error;
 
 /// Verifica si un proveedor con el código especificado existe en el HashMap.
 ///
@@ -11,14 +10,12 @@ use crate::src::controllers::controller_error;
 /// # Retorno
 /// - `true` si existe un proveedor con ese código.
 /// - `false` en caso contrario.
-
 pub fn validar_existencia(codigo: String,dc: HashMap)->bool{
     for (codigo,(rs,ruc,direccion, ciudad)) in &dc{
         if codigo == &codigo {
             return true;
         }
     }
-    controller_error::controller_error_no_existencia();
     return false;
 }
 /// Verifica si un proveedor con el código especificado **no existe** en el HashMap.
@@ -36,7 +33,7 @@ pub fn validar_existencia(codigo: String,dc: HashMap)->bool{
 pub fn validar_no_existencia(codigo: String, dc: HashMap)->bool{
     for (codigo,(rs,ruc,direccion, ciudad)) in &dc{
         if codigo == &codigo {
-            controller_error::controller_error_existencia();
+            //view::view_error::error_codigo_duplicado();
             return false;
         }
     }
@@ -58,10 +55,6 @@ pub fn validar_no_existencia(codigo: String, dc: HashMap)->bool{
 /// # Retorno
 /// - `true` si el RUC es válido y no existe en el sistema.
 /// - `false` si el RUC tiene una longitud incorrecta o ya existe.
-<<<<<<< HEAD
-
-=======
->>>>>>> 1284373 (modificando controller_articulos)
 pub fn validar_RUC(ruc: String,dc: &HashMap)->bool{
     if ruc.len() != 11{
         //view::view_error::error_
@@ -69,7 +62,7 @@ pub fn validar_RUC(ruc: String,dc: &HashMap)->bool{
     }
     for (codigo,(rs,ruc_,direccion, ciudad)) in &dc{
         if ruc == *ruc_ {
-            controller_error::controller_error_RUC_tamaño();
+            //view::view_error::error_ruc_duplicado();
             return false
         }
     }

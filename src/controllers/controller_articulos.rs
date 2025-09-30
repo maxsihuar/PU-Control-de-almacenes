@@ -6,7 +6,7 @@ pub fn run_articulo(dc : &HashMap<String, (String, String, u32)>) {
     loop{
         view::menu_secundario("Articulos".to_string());
         match opcion{
-            1 => services::service_agregar::agregar_articulo(),
+            1 => services::service_agregar::agregar_categoria(),
                 //util::utils_data::pedir_datos_categoria(),
                 //dc
             2 => services::service_modificar::modificar_categoria(),
