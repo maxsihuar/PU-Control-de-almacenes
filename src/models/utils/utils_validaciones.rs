@@ -58,7 +58,10 @@ pub fn validar_no_existencia(codigo: String, dc: HashMap)->bool{
 /// # Retorno
 /// - `true` si el RUC es válido y no existe en el sistema.
 /// - `false` si el RUC tiene una longitud incorrecta o ya existe.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1284373 (modificando controller_articulos)
 pub fn validar_RUC(ruc: String,dc: &HashMap)->bool{
     if ruc.len() != 11{
         //view::view_error::error_
