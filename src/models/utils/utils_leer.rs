@@ -1,17 +1,14 @@
-
-
+use crate::models::utils::utils_validaciones;
+use std::io;
 pub fn pedir_datos_categoria() -> (String, String) {
     let mut codigo = String::new();
     let mut nombre = String::new();
-
     println!("Ingrese el codigo de la categoria: ");
     std::io::stdin().read_line(&mut codigo).expect("Error al leer el codigo");
     let codigo = codigo.trim().to_string();
-
     println!("Ingrese el nombre de la categoria: ");
     std::io::stdin().read_line(&mut nombre).expect("Error al leer el nombre");
     let nombre = nombre.trim().to_string();
-
     return (codigo, nombre);
 }
 
