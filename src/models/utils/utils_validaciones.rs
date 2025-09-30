@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+use crate::src::controllers::controller_error;
+
 /// Verifica si un proveedor con el código especificado existe en el HashMap.
 ///
 /// # Parámetros
@@ -10,18 +11,16 @@
 /// # Retorno
 /// - `true` si existe un proveedor con ese código.
 /// - `false` en caso contrario.
-=======
 
->>>>>>> 0c85edb (Add and fixed error_view)
 pub fn validar_existencia(codigo: String,dc: HashMap)->bool{
     for (codigo,(rs,ruc,direccion, ciudad)) in &dc{
         if codigo == &codigo {
             return true;
         }
     }
+    controller_error::controller_error_no_existencia();
     return false;
 }
-<<<<<<< HEAD
 /// Verifica si un proveedor con el código especificado **no existe** en el HashMap.
 ///
 /// # Parámetros
@@ -33,18 +32,17 @@ pub fn validar_existencia(codigo: String,dc: HashMap)->bool{
 /// # Retorno
 /// - `true` si el proveedor con ese código **no existe**.
 /// - `false` si el proveedor **ya existe**.
-=======
->>>>>>> 0c85edb (Add and fixed error_view)
+
 pub fn validar_no_existencia(codigo: String, dc: HashMap)->bool{
     for (codigo,(rs,ruc,direccion, ciudad)) in &dc{
         if codigo == &codigo {
-            //view::view_error::error_codigo_duplicado();
+            controller_error::controller_error_existencia();
             return false;
         }
     }
     return true;
 }
-<<<<<<< HEAD
+
 /// Valida un número de RUC antes de registrar un proveedor.
 ///
 /// # Reglas de validación
@@ -60,8 +58,7 @@ pub fn validar_no_existencia(codigo: String, dc: HashMap)->bool{
 /// # Retorno
 /// - `true` si el RUC es válido y no existe en el sistema.
 /// - `false` si el RUC tiene una longitud incorrecta o ya existe.
-=======
->>>>>>> 0c85edb (Add and fixed error_view)
+
 pub fn validar_RUC(ruc: String,dc: &HashMap)->bool{
     if ruc.len() != 11{
         //view::view_error::error_
@@ -69,7 +66,7 @@ pub fn validar_RUC(ruc: String,dc: &HashMap)->bool{
     }
     for (codigo,(rs,ruc_,direccion, ciudad)) in &dc{
         if ruc == *ruc_ {
-            //view::view_error::error_ruc_duplicado();
+            controller_error::controller_error_RUC_tamaño();
             return false
         }
     }
