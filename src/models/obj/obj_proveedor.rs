@@ -13,6 +13,6 @@ use std::collections::HashMap;
 ///   5. `String` — Ciudad.
 
 
-pub fn crear_proveedor() -> HashMap<String, (String, String, u32, String, String)> {
+pub fn crear_proveedor() -> HashMap<String, (String, String, String, String)> {
     return HashMap::new()
 }
