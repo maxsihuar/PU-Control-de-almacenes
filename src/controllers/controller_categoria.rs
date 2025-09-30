@@ -1,6 +1,8 @@
 use crate::views::view_menu;
 use crate::models::services;
 
+use std::collections::HashMap;
+
 pub fn run_categoria(dc : &HashMap<String, String>) {
     loop{
         view::menu_secundario("Categorias".to_string());
@@ -11,10 +13,4 @@ pub fn run_categoria(dc : &HashMap<String, String>) {
             ),
         }
     }
-}
-
-fn agregar_categoria() {
-    let mut categorias = Categorias();
-    categorias.insert("NT".to_string(), "Nutricion".to_string());
-    return categorias;
 }

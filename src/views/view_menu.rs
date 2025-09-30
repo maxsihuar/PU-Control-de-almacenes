@@ -1,3 +1,4 @@
+
 /// Muestra en pantalla el menú principal del sistema de gestión.
 ///
 /// Este menú permite al usuario navegar por las distintas
@@ -13,7 +14,11 @@
 /// 6. Salidas  
 /// 7. Detalles de Salida  
 /// 8. Salir
+
 pub fn menu_principal(){
+
+    utils_view::limpiar_pantalla();
+
     println!("--- Menu Principal ---");
     println!("1. Categorias");
     println!("2. Artículos");
@@ -33,6 +38,9 @@ pub fn menu_principal(){
 /// # Parámetros
 /// - `texto`: Texto descriptivo que se concatenará al título del menú.
 pub fn menu_secundario(texto: String){
+
+    utils_view::limpiar_pantalla();
+
     let base = "Menu ";
     let texto_final: String = base.to_string() + &texto;
     println!("---{}---",texto_final);
