@@ -7,6 +7,7 @@ pub fn leer_datos_articulo() -> (String, (String, String, u32)) {
     let descripcion = utils::utils_leer::leer_string();
     let precio = utils::utils_leer::leer_u32();
 
+<<<<<<< HEAD
 
     return (codigo, (descripcion, categoria, precio));
 
