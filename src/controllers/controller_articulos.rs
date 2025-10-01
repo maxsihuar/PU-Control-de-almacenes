@@ -14,7 +14,6 @@ pub fn leer_datos_articulo() -> (String, (String, String, u32)) {
     // Lógica para leer datos del artículo
     view_leer::mostrar_titulo("INGRESE EL CODIGO DEL ARTICULO");
     let codigo = utils::utils_leer::leer_string();
-
     view_leer::mostrar_mensaje("Ingrese la descripcion del articulo:");
     let descripcion = utils::utils_leer::leer_string();
     view_leer::mostrar_mensaje("Ingrese la categoria del articulo:");

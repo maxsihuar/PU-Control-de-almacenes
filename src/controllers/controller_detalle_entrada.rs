@@ -3,7 +3,9 @@ use crate::models::services;
 use std::collections::HashMap;
 pub fn leer_datos_detalle_entrada() -> (String, HashMap<String, (u32,u32)>) {
     // Lógica para leer datos del artículo
+    view_leer::mostrar_titulo("INGRESE EL CODIGO DEL DETALLE DE LA ENTRADA");
     let codigo = utils::utils_leer::leer_string();
+    view_leer::mostrar_mensaje("Ingrese la descripcion de la categoria:");
     let descripcion = utils::utils_leer::leer_string();
     return (codigo, descripcion);
 }

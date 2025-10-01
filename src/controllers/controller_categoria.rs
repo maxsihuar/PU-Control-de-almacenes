@@ -1,4 +1,5 @@
 use crate::views::view_menu;
+use crate::view::view_leer;
 use crate::models::services;
 use std::collections::HashMap;
 /// Lee desde la entrada estándar los datos de una categoría.
@@ -8,7 +9,9 @@ use std::collections::HashMap;
 /// - `String`: descripción de la categoría.
 pub fn leer_datos_categoria() -> (String, String) {
     // Lógica para leer datos del artículo
+    view_leer::mostrar_titulo("INGRESE EL CODIGO DE LA CATEGORIA");
     let codigo = utils::utils_leer::leer_string();
+    view_leer::mostrar_mensaje("Ingrese la descripcion de la categoria:");
     let descripcion = utils::utils_leer::leer_string();
     return (codigo, descripcion);
 }
