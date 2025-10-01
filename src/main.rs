@@ -2,6 +2,7 @@ pub mod controllers;
 pub mod models;
 pub mod views;
 
+pub mod tests;
 /// Punto de entrada del programa.
 /// 
 /// Esta función invoca la función `run` del módulo `controller_main` dentro de `controllers`,
