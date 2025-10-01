@@ -4,9 +4,9 @@ use std::collections::HashMap;
 
 pub fn leer_datos_articulo() -> (String, (String, String, u32)) {
     // Lógica para leer datos del artículo
-    let codigo = utils::utils_leer::leer_string()
-    let descripcion = utils::utils_leer::leer_string()
-    let precio = utils::utils_leer::leer_u32()
+    let codigo = utils::utils_leer::leer_string();
+    let descripcion = utils::utils_leer::leer_string();
+    let precio = utils::utils_leer::leer_u32();
 
     return (codigo, (descripcion, categoria, precio));
 
