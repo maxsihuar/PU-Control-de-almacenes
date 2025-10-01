@@ -2,7 +2,7 @@ use crate::views::view_menu;
 use crate::models::services;
 use std::collections::HashMap;
 
-pub fn run_detalle_entrada(dc : &HashMap<String, String>) {
+pub fn run_detalle_entrada(dc : &HashMap<String, HashMap<String, Vec<u32,u32>>>) {
     loop{
         view::menu_secundario("Detalles de Salida".to_string());
         match opcion{

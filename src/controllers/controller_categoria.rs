@@ -2,7 +2,7 @@ use crate::views::view_menu;
 use crate::models::services;
 use std::collections::HashMap;
 
-pub fn run_categoria(dc : &HashMap<String, String>) {
+pub fn run_categoria(dc : &Hashmap<String, String>) {
     loop{
         view::menu_secundario("Categorias".to_string());
         match opcion{

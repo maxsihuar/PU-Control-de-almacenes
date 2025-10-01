@@ -7,10 +7,11 @@ pub fn leer_datos_articulo() -> (String, (String, String, u32)) {
     let descripcion = utils::utils_leer::leer_string();
     let precio = utils::utils_leer::leer_u32();
 
+
     return (codigo, (descripcion, categoria, precio));
 
 }
-pub fn run_articulo(dc : &HashMap<String, (String, String, u32)>) {
+pub fn run_articulo(dc : &HashMap<String, Vec<String,String,u32>>) {
     loop{
         view::menu_secundario("Articulos".to_string());
         match opcion{
