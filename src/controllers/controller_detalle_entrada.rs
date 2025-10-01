@@ -1,7 +1,12 @@
 use crate::views::view_menu;
 use crate::models::services;
 use std::collections::HashMap;
-
+pub fn leer_datos_detalle_entrada() -> (String, HashMap<String, (u32,u32)>) {
+    // Lógica para leer datos del artículo
+    let codigo = utils::utils_leer::leer_string();
+    let descripcion = utils::utils_leer::leer_string();
+    return (codigo, descripcion);
+}
 pub fn run_detalle_entrada(dc : &HashMap<String, HashMap<String, (u32,u32)>>) {
     loop{
         view::menu_secundario("Detalles de Entrada".to_string());
