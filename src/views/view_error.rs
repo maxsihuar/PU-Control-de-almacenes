@@ -1,5 +1,4 @@
-use crate::src::views::utils::utils_view;
-
+use super::utils::utils_view;
 
 /// Muestra un mensaje de error cuando el código ya existe en el sistema.
 ///
@@ -11,7 +10,7 @@ pub fn error_existencia() {
     println!("********************************************");
     println!("*         ERROR: EL CODIGO  YA EXISTE      *");
     println!("********************************************");
-    utils_view::pausa();
+    utils_view::pausar();
 }
 
 /// Muestra un mensaje de error cuando el código no existe en el sistema.
@@ -24,7 +23,7 @@ pub fn error_no_existencia() {
     println!("********************************************");
     println!("*      ERROR: EL CODIGO NO EXISTE          *");
     println!("********************************************");
-    utils_view::pausa();
+    utils_view::pausar();
 }
 
 /// Muestra un mensaje de error cuando el RUC no tiene el tamaño correcto.
@@ -37,6 +36,7 @@ pub fn error_RUC_tamaño() {
     println!("********************************************");
     println!("*   ERROR: EL RUC DEBE TENER 11 DIGITOS    *");
     println!("********************************************");
+    utils_view::pausar();
 }
 
 /// Muestra un mensaje de error cuando un RUC ya pertenece a un proveedor.
@@ -49,7 +49,7 @@ pub fn error_RUC_existencia() {
     println!("*********************************************");
     println!("* ERROR: EL RUC YA PERTENECE A UN PROVEEDOR *");
     println!("*********************************************");
-    utils_view::pausa();
+    utils_view::pausar();
 }
 
 /// Muestra un mensaje de error cuando se ingresa una opción inválida.
@@ -62,5 +62,5 @@ pub fn view_error_opcion() {
     println!("********************************************");
     println!("*         ERROR: OPCION NO VALIDA          *");
     println!("********************************************");
-    utils_view::pausa();
+    utils_view::pausar();
 }

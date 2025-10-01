@@ -1,5 +1,7 @@
-
+pub mod controllers;
+pub mod models;
+pub mod views;
 
 fn main() {
-    println!("Iniciando sistema...");
+    controllers::controller_main::run();
 }

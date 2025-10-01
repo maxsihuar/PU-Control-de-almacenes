@@ -35,7 +35,7 @@ enum Valor {
 ///   - `None` → no había un elemento con esa clave.
 
 
-pub fn eliminar(dc: &mut HashMap<String, Valor>, leer : fn(), clave: String){
+pub fn eliminar(dc: &mut HashMap<String, Valor>, clave: String) {
 
     dc.remove(&clave);
 }
