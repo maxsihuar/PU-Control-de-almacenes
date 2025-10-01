@@ -2,11 +2,16 @@ use crate::views::view_menu;
 use crate::models::services;
 use std::collections::HashMap;
 
+pub fn leer_datos_articulo() -> (String, (String, String, u32)) {
+    // Lógica para leer datos del artículo
+    //
+}
+
 pub fn run_articulo(dc : &HashMap<String, (String, String, u32)>) {
     loop{
         view::menu_secundario("Articulos".to_string());
         match opcion{
-            1 => services::service_agregar::agregar_categoria(),
+            1 => services::service_agregar(dc, leer_datos_articulo()),
                 //util::utils_data::pedir_datos_categoria(),
                 //dc
             2 => services::service_modificar::modificar_categoria(),
