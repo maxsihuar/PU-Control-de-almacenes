@@ -1,6 +1,5 @@
 use crate::views::view_menu;
 use crate::controllers::controller_error;
-use crate::controllers;
 use crate::models::obj;
 
 pub fn run(){
@@ -21,17 +20,17 @@ pub fn run(){
         view_menu::menu_principal();
 
 
-
+        
         match opcion{
-            1 => controllers::controller_categorias::run(),
-            2 => controllers::controller_articulos::run(),
-            3 => controllers::controller_cliente::run(),
-            4 => controllers::controller_proveedor::run(),
-            5 => controllers::controller_salida::run(),
-            6 => controllers::controller_entrada::run(),
-            7 => controllers::controller_detalle_salida::run(),
-            8 => controllers::controller_detalle_entrada::run(),
-            9 => controllers::controller_reportes::run(),
+            1 => controller_categorias::run(),
+            2 => controller_articulos::run(),
+            3 => controller_cliente::run(),
+            4 => controller_proveedor::run(),
+            5 => controller_salida::run(),
+            6 => controller_entrada::run(),
+            7 => controller_detalle_salida::run(),
+            8 => controller_detalle_entrada::run(),
+            9 => controller_reportes::run(),
             0 => break,
             _ => controller_error::opcion_no_valida(),
         }
