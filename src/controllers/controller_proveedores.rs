@@ -1,6 +1,9 @@
 use crate::views::view_menu;
 use crate::models::services;
-use crate::view::view_leer;
+use crate::views::view_leer;
+use crate::views::view_error;
+use crate::views::view_listar;
+use crate::models::utils;
 use std::collections::HashMap;
 /// Lee los datos de un proveedor desde la entrada estándar.
 ///
@@ -19,10 +22,19 @@ use std::collections::HashMap;
 /// - `ruc`: Número de RUC del proveedor (11 dígitos).
 /// - `direccion`: Dirección del proveedor.
 /// - `ciudad`: Ciudad donde se ubica el proveedor.
-pub fn leer_datos_proveedores() -> (String, (String, String,String, String)) {
-    // Lógica para leer datos del artículo
-    view_leer::mostrar_titulo("INGRESE EL CODIGO DE LA SALIDA");
-    let codigo = utils::utils_leer::leer_string();
+pub fn leer_datos_proveedores(dc: &mut HashMap<String, (String, String, String, String)>) -> (String, (String, String,String, String)) {
+    let mut codigo:String;
+    loop {
+        view_leer::mostrar_titulo("INGRESE EL CODIGO DE LA SALIDA");
+        codigo = utils::utils_leer::leer_string();
+
+        if utils::utils_validaciones::validar_existencia_t2(codigo.clone(), &mut HashMap::new()){
+            view_error::error_existencia();
+        } else {
+            break;
+        }
+    }
+
     view_leer::mostrar_mensaje("Ingrese la razón social del proveedor:");
     let rs = utils::utils_leer::leer_string();
     view_leer::mostrar_mensaje("Ingrese el RUC del proveedor:");
@@ -33,7 +45,30 @@ pub fn leer_datos_proveedores() -> (String, (String, String,String, String)) {
     let ciudad = utils::utils_leer::leer_string();
     return (codigo,(rs, ruc, direccion, ciudad));
 }
-use std::collections::HashMap;
+
+pub fn leer_datos_proveedores_m(dc: &mut HashMap<String, (String, String, String, String)>) -> (String, (String, String,String, String)) {
+    let mut codigo:String;
+    loop {
+        view_leer::mostrar_titulo("INGRESE EL CODIGO DE LA SALIDA");
+        codigo = utils::utils_leer::leer_string();
+
+        if !utils::utils_validaciones::validar_existencia_t2(codigo.clone(), &mut HashMap::new()){
+            view_error::error_no_existencia();
+        } else {
+            break;
+        }
+    }
+
+    view_leer::mostrar_mensaje("Ingrese la razón social del proveedor:");
+    let rs = utils::utils_leer::leer_string();
+    view_leer::mostrar_mensaje("Ingrese el RUC del proveedor:");
+    let ruc = utils::utils_leer::leer_string();
+    view_leer::mostrar_mensaje("Ingrese la dirección del proveedor:");
+    let direccion = utils::utils_leer::leer_string();
+    view_leer::mostrar_mensaje("Ingrese la ciudad del proveedor:");
+    let ciudad = utils::utils_leer::leer_string();
+    return (codigo,(rs, ruc, direccion, ciudad));
+}
 
 /// Controlador principal para la gestión de proveedores.
 ///
@@ -50,21 +85,17 @@ use std::collections::HashMap;
 ///   - `String`: código del proveedor.
 ///   - `(String, String, String, String)`: razón social, RUC, dirección y ciudad.
 ///
-/// # Ejemplo
-/// ```ignore
-/// let mut proveedores: HashMap<String, (String, String, String, String)> = HashMap::new();
-/// run_proveedores(&mut proveedores);
-/// ```
 pub fn run_proveedores(dc: &mut HashMap<String, (String, String, String, String)>) {
     loop {
-        view::menu_secundario("Proveedores".to_string());
+        view_menu::menu_secundario("Proveedores".to_string());
+        view_leer::mostrar_mensaje("Ingrese una opcion:");
         let opcion = utils::utils_leer::leer_u32();
 
         match opcion {
-            1 => services::service_agregar::agregar(dc, leer_datos_proveedores()),
-            2 => services::service_modificar::modificar(dc, leer_datos_proveedores()),
-            3 => services::service_eliminar::eliminar(dc, utils::utils_leer::leer_string()),
-            4 => services::service_listar::listar(dc,vec!["Codigo", "Razon Social", "RUC", "Direccion", "Ciudad"]),
+            1 => services::services_agregar::agregar_t2(dc, leer_datos_proveedores),
+            2 => services::services_modificar::modificar_t2(dc, leer_datos_proveedores_m),
+            3 => services::services_eliminar::eliminar_t2(dc, utils::utils_leer::leer_string()),
+            4 => view_listar::mostrar_listado(services::services_listar::listar_t2(dc,vec!["Codigo", "Razon Social", "RUC", "Direccion", "Ciudad"])),
             5 => break,
             _ => println!("Opcion no valida"),
         }

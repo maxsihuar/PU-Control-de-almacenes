@@ -1,61 +1,53 @@
+use std:: collections::HashMap;
 
-/// Verifica si un proveedor con el código especificado existe en el HashMap.
-///
-/// # Parámetros
-/// - `codigo`: Código del proveedor a buscar.
-/// - `dc`: HashMap que almacena los proveedores. 
-///    La clave es el código del proveedor (`String`) 
-///    y el valor es una tupla con los datos: `(rs, ruc, direccion, ciudad)`.
-///
-/// # Retorno
-/// - `true` si existe un proveedor con ese código.
-/// - `false` en caso contrario.
-pub fn validar_existencia(codigo: String,dc: HashMap)->bool{
-    for (codigo,(rs,ruc,direccion, ciudad)) in &dc{
-        if codigo == &codigo {
+pub fn validar_existencia_s(codigo: String,dc: &mut HashMap<String,String>)->bool{
+    for clave in dc.keys(){
+        if &codigo == clave {
             return true;
         }
     }
     return false;
 }
-/// Verifica si un proveedor con el código especificado **no existe** en el HashMap.
-///
-/// # Parámetros
-/// - `codigo`: Código del proveedor a verificar.
-/// - `dc`: HashMap que almacena los proveedores. 
-///    La clave es el código del proveedor (`String`) 
-///    y el valor es una tupla con los datos: `(rs, ruc, direccion, ciudad)`.
-///
-/// # Retorno
-/// - `true` si el proveedor con ese código **no existe**.
-/// - `false` si el proveedor **ya existe**.
 
-pub fn validar_no_existencia(codigo: String, dc: HashMap)->bool{
-    for (codigo,(rs,ruc,direccion, ciudad)) in &dc{
-        if codigo == &codigo {
-            //view::view_error::error_codigo_duplicado();
-            return false;
+pub fn validar_existencia_t1(codigo: String,dc: &mut HashMap<String, (String,String,u32)>)->bool{
+    for clave in dc.keys(){
+        if &codigo == clave {
+            return true;
         }
     }
-    return true;
+    return false;
 }
 
-/// Valida un número de RUC antes de registrar un proveedor.
-///
-/// # Reglas de validación
-/// 1. El RUC debe tener exactamente **11 caracteres**.
-/// 2. El RUC no debe estar ya registrado en el `HashMap`.
-///
-/// # Parámetros
-/// - `ruc`: Número de RUC a validar.
-/// - `dc`: HashMap que almacena los proveedores. 
-///    La clave es el código del proveedor (`String`) 
-///    y el valor es una tupla con los datos: `(rs, ruc, direccion, ciudad)`.
-///
-/// # Retorno
-/// - `true` si el RUC es válido y no existe en el sistema.
-/// - `false` si el RUC tiene una longitud incorrecta o ya existe.
-pub fn validar_RUC(ruc: String, dc: &HashMap<String, (String, String, String, String)>) -> bool {
+pub fn validar_existencia_t2(codigo: String,dc: &mut HashMap<String,(String,String,String,String)>)->bool{
+    for clave in dc.keys(){
+        if &codigo == clave {
+            return true;
+        }
+    }
+    return false;
+}
+
+pub fn validar_existencia_t3(codigo: String,dc: &mut HashMap<String,(String,String)>)->bool{
+    for clave in dc.keys(){
+        if &codigo == clave {
+            return true;
+        }
+    }
+    return false;
+}
+
+pub fn validar_existencia_h(codigo: String,dc: &mut HashMap<String, HashMap<String,(u32,u32)>>)->bool{
+    for clave in dc.keys(){
+        if &codigo == clave {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+pub fn validar_RUC(ruc: String, dc: &mut HashMap<String, (String, String, String, String)>) -> bool {
     if ruc.len() != 11 {
         return false;
     }

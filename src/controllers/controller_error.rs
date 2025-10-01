@@ -1,4 +1,4 @@
-use crate::src::views::view_error;
+use crate::views::view_error;
 
 /// Controlador que gestiona el error cuando un código no existe.
 ///

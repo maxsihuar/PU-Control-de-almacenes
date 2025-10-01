@@ -1,6 +1,9 @@
 use crate::views::view_menu;
-use crate::view::view_leer;
+use crate::views::view_leer;
+use crate::views::view_error;
 use crate::models::services;
+use crate::views::view_listar;
+use crate::models::utils;
 use std::collections::HashMap;
 /// Lee desde la entrada estándar los datos de un **detalle de entrada**.
 ///
@@ -19,13 +22,23 @@ use std::collections::HashMap;
 ///    - Código del artículo.  
 ///    - Cantidad.  
 ///    - Precio.  
-pub fn leer_datos_detalle_entrada() -> (String, HashMap<String, (u32,u32)>) {
+pub fn leer_datos_detalle_entrada(dc: &mut HashMap<String, HashMap<String, (u32, u32)>>) -> (String, HashMap<String, (u32,u32)>) {
+    let mut codigo:String;
+    loop{
+        view_leer::mostrar_titulo("INGRESE EL CODIGO DEL DETALLE DE LA ENTRADA");
+        codigo = utils::utils_leer::leer_string();
+
+        if utils::utils_validaciones::validar_existencia_h(codigo.clone(), dc){
+            view_error::error_existencia();
+        } else {
+            break;
+        }
+    }
     // Lógica para leer datos del artículo
-    view_leer::mostrar_titulo("INGRESE EL CODIGO DEL DETALLE DE LA ENTRADA");
-    let codigo = utils::utils_leer::leer_string();
-    let dictemp : HashMap<String, (u32,u32)> = HashMap::new();
+
+    let mut dictemp : HashMap<String, (u32,u32)> = HashMap::new();
     view_leer::mostrar_mensaje("Ingrese la cantidad de articulos a ingresar:");
-    let mut n : u32 = utils::utils_leer::leer_u32();
+    let n : u32 = utils::utils_leer::leer_u32();
     for _i in 0..n {
         view_leer::mostrar_mensaje("Ingrese el codigo del articulo:");
         let codigo_articulo = utils::utils_leer::leer_string();
@@ -37,6 +50,36 @@ pub fn leer_datos_detalle_entrada() -> (String, HashMap<String, (u32,u32)>) {
     }
     return (codigo, dictemp);
 }
+
+pub fn leer_datos_detalle_entrada_m(dc: &mut HashMap<String, HashMap<String, (u32, u32)>>) -> (String, HashMap<String, (u32,u32)>) {
+    let mut codigo:String;
+    loop{
+        view_leer::mostrar_titulo("INGRESE EL CODIGO DEL DETALLE DE LA ENTRADA");
+        codigo = utils::utils_leer::leer_string();
+
+        if !utils::utils_validaciones::validar_existencia_h(codigo.clone(), dc){
+            view_error::error_no_existencia();
+        } else {
+            break;
+        }
+    }
+    // Lógica para leer datos del artículo
+
+    let mut dictemp : HashMap<String, (u32,u32)> = HashMap::new();
+    view_leer::mostrar_mensaje("Ingrese la cantidad de articulos a ingresar:");
+    let n : u32 = utils::utils_leer::leer_u32();
+    for _i in 0..n {
+        view_leer::mostrar_mensaje("Ingrese el codigo del articulo:");
+        let codigo_articulo = utils::utils_leer::leer_string();
+        view_leer::mostrar_mensaje("Ingrese la cantidad del articulo:");
+        let cantidad = utils::utils_leer::leer_u32();
+        view_leer::mostrar_mensaje("Ingrese el precio del articulo:");
+        let precio = utils::utils_leer::leer_u32();
+        dictemp.insert(codigo_articulo, (cantidad,precio));
+    }
+    return (codigo, dictemp);
+}
+
 /// Menú interactivo para la gestión de Detalles de Entrada.
 ///
 /// - `dc`: Diccionario principal de detalles de entrada.
@@ -53,13 +96,14 @@ pub fn leer_datos_detalle_entrada() -> (String, HashMap<String, (u32,u32)>) {
 /// 5. Salir
 pub fn run_detalle_entrada(dc: &mut HashMap<String, HashMap<String, (u32, u32)>>){
     loop{
-        view::menu_secundario("Detalles de Entrada".to_string());
+        view_menu::menu_secundario("Detalles de Entrada".to_string());
+        view_leer::mostrar_mensaje("Ingrese una opcion:");
         let opcion = utils::utils_leer::leer_u32();
         match opcion{
-            1 => services::service_agregar(dc, leer_datos_detalle_entrada()),
-            2 => services::service_modificar::modificar(dc,leer_datos_detalle_entrada()),
-            3 => services::service_eliminar::eliminar(dc,utils::utils_leer::leer_string()),
-            4 => services::service_listar::listar(dc, vec!["Codigo", "Codigo Articulo", "Cantidad", "Precio"]),
+            1 => services::services_agregar::agregar_h(dc, leer_datos_detalle_entrada),
+            2 => services::services_modificar::modificar_h(dc,leer_datos_detalle_entrada_m),
+            3 => services::services_eliminar::eliminar_h(dc,utils::utils_leer::leer_string()),
+            4 => view_listar::mostrar_listado(services::services_listar::listar_h(dc, vec!["Codigo", "Codigo Articulo", "Cantidad", "Precio"])),
             5 => break,
             _ => println!("Opcion no valida"
             ),

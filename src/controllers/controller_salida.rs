@@ -1,5 +1,8 @@
 use crate::views::view_menu;
-use crate::view::view_leer;
+use crate::views::view_leer;
+use crate::views::view_error;
+use crate::views::view_listar;
+use crate::models::utils;
 use crate::models::services;
 use std::collections::HashMap;
 /// Solicita y devuelve los datos necesarios para registrar una **salida**.
@@ -20,15 +23,44 @@ use std::collections::HashMap;
 /// 2. Solicita al usuario el DNI del cliente.
 /// 3. Solicita la fecha de la salida.
 /// 4. Retorna los datos empaquetados.
-pub fn leer_datos_salida() -> (String, (String, String)) {
-    // Lógica para leer datos del artículo
-    view_leer::mostrar_titulo("INGRESE EL CODIGO DE LA SALIDA");
-    let codigo = utils::utils_leer::leer_string();
-    view_leer::mostrar_mensaje("Ingrese el DNI del cliente:");
-    let dni = utils::utils_leer::leer_string();
+pub fn leer_datos_salida(dc : &mut HashMap<String, (String, String)>) -> (String, (String, String)) {
+
+    let mut codigo:String;
+    loop{
+        view_leer::mostrar_titulo("INGRESE EL CODIGO DE LA SALIDA");
+        codigo = utils::utils_leer::leer_string();
+
+        if utils::utils_validaciones::validar_existencia_t3(codigo.clone(), dc){
+            view_error::error_existencia();
+        } else {
+            break;
+        }
+    }
+    view_leer::mostrar_mensaje("Ingrese el código del proveedor:");
+    let proveedor = utils::utils_leer::leer_string();
     view_leer::mostrar_mensaje("Ingrese la fecha de la salida:");
     let fecha = utils::utils_leer::leer_string();
-    return (codigo,(dni, fechas));
+    return (codigo,(proveedor, fecha));
+}
+
+pub fn leer_datos_salida_m(dc : &mut HashMap<String, (String, String)>) -> (String, (String, String)) {
+
+    let mut codigo:String;
+    loop{
+        view_leer::mostrar_titulo("INGRESE EL CODIGO DE LA SALIDA");
+        codigo = utils::utils_leer::leer_string();
+
+        if !utils::utils_validaciones::validar_existencia_t3(codigo.clone(), dc){
+            view_error::error_no_existencia();
+        } else {
+            break;
+        }
+    }
+    view_leer::mostrar_mensaje("Ingrese el código del proveedor:");
+    let proveedor = utils::utils_leer::leer_string();
+    view_leer::mostrar_mensaje("Ingrese la fecha de la entrada:");
+    let fecha = utils::utils_leer::leer_string();
+    return (codigo,(proveedor, fecha));
 }
 /// Ejecuta el menú principal de gestión de **salidas**.
 ///
@@ -49,13 +81,14 @@ pub fn leer_datos_salida() -> (String, (String, String)) {
 /// 5. **Salir**: Finaliza la ejecución del menú.
 pub fn run_salida(dc : &mut HashMap<String, (String, String)>) {
     loop{
-        view::menu_secundario("Entrada".to_string());
+        view_menu::menu_secundario("Entrada".to_string());
+        view_leer::mostrar_mensaje("Ingrese una opcion:");
         let opcion = utils::utils_leer::leer_u32();
         match opcion{
-            1 => services::service_agregar(dc,leer_datos_salida()),
-            2 => services::service_modificar::modificar(dc,leer_datos_salida()),
-            3 => services::service_eliminar::eliminar(dc,utils::utils_leer::leer_string()),
-            4 => services::service_listar::listar(dc, vec!["Codigo", "Cliente", "Fecha"]),
+            1 => services::services_agregar::agregar_t3(dc,leer_datos_salida),
+            2 => services::services_modificar::modificar_t3(dc,leer_datos_salida_m),
+            3 => services::services_eliminar::eliminar_t3(dc,utils::utils_leer::leer_string()),
+            4 => view_listar::mostrar_listado(services::services_listar::listar_t3(dc, vec!["Codigo", "Cliente", "Fecha"])),
             5 => break,
             _ => println!("Opcion no valida"
             ),

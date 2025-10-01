@@ -1,3 +1,10 @@
 pub mod controller_main;
 pub mod controller_categoria;
 pub mod controller_error;
+pub mod controller_articulos;
+pub mod controller_detalle_entrada;
+pub mod controller_detalle_salida;
+pub mod controller_entrada;
+pub mod controller_proveedores;
+pub mod controller_salida;
+pub mod controller_reporte;

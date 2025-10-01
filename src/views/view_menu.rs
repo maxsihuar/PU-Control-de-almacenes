@@ -27,7 +27,7 @@ pub fn menu_principal(){
     println!("5. Detalles de Entrada");
     println!("6. Salidas");
     println!("7. Detalles de Salida");
-    println!("8. Salir");
+    println!("0. Salir");
 } 
 /// Muestra un menú secundario genérico con opciones de gestión.
 ///
