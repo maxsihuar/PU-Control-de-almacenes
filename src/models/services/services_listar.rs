@@ -17,7 +17,7 @@ enum Valor {
 
 pub fn listar(dc: &mut HashMap<String, Valor>, leer : fn(), titulos : Vec<str>){
 
-
+    
     
 }
 
