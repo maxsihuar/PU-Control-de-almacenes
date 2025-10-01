@@ -55,16 +55,45 @@ pub fn validar_no_existencia(codigo: String, dc: HashMap)->bool{
 /// # Retorno
 /// - `true` si el RUC es válido y no existe en el sistema.
 /// - `false` si el RUC tiene una longitud incorrecta o ya existe.
-pub fn validar_RUC(ruc: String,dc: &HashMap)->bool{
-    if ruc.len() != 11{
-        //view::view_error::error_
-        return false
+pub fn validar_RUC(ruc: String, dc: &HashMap<String, (String, String, String, String)>) -> bool {
+    if ruc.len() != 11 {
+        return false;
     }
-    for (codigo,(rs,ruc_,direccion, ciudad)) in &dc{
+
+    for (_codigo, (_rs, ruc_, _direccion, _ciudad)) in dc {
         if ruc == *ruc_ {
-            //view::view_error::error_ruc_duplicado();
-            return false
+            return false;
         }
     }
-    return true
+
+    true
+}
+
+/// Valida un número de DNI.
+///
+/// Reglas:
+/// - Debe tener exactamente 8 caracteres.
+/// - No debe estar duplicado en la colección.
+///
+/// # Parámetros
+/// - `dni`: DNI a validar.
+/// - `dc`: HashMap de registros, donde:
+///   - La clave es un `String` (código).
+///   - El valor es `(String, String)` donde el primer campo es el DNI.
+///
+/// # Retorno
+/// - `true` si el DNI es válido.
+/// - `false` si no cumple las condiciones.
+pub fn validar_DNI(dni: String, dc: &HashMap<String, (String, String)>) -> bool {
+    if dni.len() != 8 {
+        return false;
+    }
+
+    for (_codigo, (dni_existente, _fecha)) in dc {
+        if dni == *dni_existente {
+            return false;
+        }
+    }
+
+    true
 }

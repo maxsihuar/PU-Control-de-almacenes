@@ -37,7 +37,7 @@ pub fn run_categoria(dc : &Hashmap<String, String>) {
             1 => services::service_agregar(dc, leer_datos_categoria()),
             2 => services::service_modificar::modificar(dc,leer_datos_categoria()),
             3 => services::service_eliminar::eliminar(dc,utils::utils_leer::leer_string()),
-            4 => services::service_listar::listar(dc),
+            4 => services::service_listar::listar(dc, vec!["Codigo", "Descripcion"]),
             5 => break,
             _ => println!("Opcion no valida"
             ),
