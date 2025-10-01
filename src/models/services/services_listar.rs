@@ -1,6 +1,16 @@
 use std::collections::HashMap;
 
 
+/// Lista el contenido de un HashMap de categorías.
+///
+/// # Parámetros
+/// - `dc`: HashMap mutable con clave = código de categoría, valor = nombre de categoría.
+/// - `titulos`: Vector de títulos para el encabezado de la tabla.
+///
+/// # Retorna
+/// Una tupla `(encabezado, filas)` donde `encabezado` es la fila de títulos y `filas` contiene
+/// cada fila formateada de la tabla.
+
 //Categoria
 pub fn listar_s(dc: &mut HashMap<String, String>, titulos : Vec<&str>) -> (String, Vec<String>){
 
@@ -22,6 +32,14 @@ pub fn listar_s(dc: &mut HashMap<String, String>, titulos : Vec<&str>) -> (Strin
 
 }
 
+/// Lista el contenido de un HashMap de artículos.
+///
+/// # Parámetros
+/// - `dc`: HashMap mutable con clave = código de artículo, valor = (nombre, categoría, precio).
+/// - `titulos`: Vector de títulos para el encabezado.
+///
+/// # Retorna
+/// `(encabezado, filas)` formateadas.
 
 //Articulo
 pub fn listar_t1(dc: &mut HashMap<String, (String,String,u32)>, titulos : Vec<&str>) -> (String, Vec<String>){
@@ -46,6 +64,15 @@ pub fn listar_t1(dc: &mut HashMap<String, (String,String,u32)>, titulos : Vec<&s
 
 }
 
+/// Lista el contenido de un HashMap de proveedores.
+///
+/// # Parámetros
+/// - `dc`: HashMap mutable con clave = código de proveedor, valor = (nombre, RUC, dirección, teléfono).
+/// - `titulos`: Vector de títulos.
+///
+/// # Retorna
+/// `(encabezado, filas)` formateadas.
+
 //proveedor
 pub fn listar_t2(dc: &mut HashMap<String,(String,String,String,String)>, titulos : Vec<&str>) -> (String, Vec<String>){
 
@@ -68,6 +95,15 @@ pub fn listar_t2(dc: &mut HashMap<String,(String,String,String,String)>, titulos
     return (encabezado, filas);
 }
 
+/// Lista documentos de entrada o salida.
+///
+/// # Parámetros
+/// - `dc`: HashMap mutable con clave = número de documento, valor = (fecha, proveedor/cliente).
+/// - `titulos`: Vector de títulos.
+///
+/// # Retorna
+/// `(encabezado, filas)` con cada documento formateado.
+
 //Entrada y Salida
 pub fn listar_t3(dc: &mut HashMap<String,(String,String)>, titulos : Vec<&str>) -> (String, Vec<String>){
 
@@ -89,6 +125,15 @@ pub fn listar_t3(dc: &mut HashMap<String,(String,String)>, titulos : Vec<&str>) 
 
     return (encabezado, filas);
 }
+
+/// Lista los detalles de documentos de entrada o salida.
+///
+/// # Parámetros
+/// - `dc`: HashMap mutable con clave = número de documento, valor = HashMap de artículos (cantidad, precio).
+/// - `titulos`: Vector de títulos.
+///
+/// # Retorna
+/// `(encabezado, filas)` donde cada fila contiene: documento, código de artículo, cantidad y precio
 
 //Detalle Entrada y Detalle Salida
 pub fn listar_h(dc: &mut HashMap<String, HashMap<String,(u32,u32)>>, titulos : Vec<&str>) -> (String, Vec<String>){

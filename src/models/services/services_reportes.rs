@@ -4,6 +4,19 @@ use crate::views::view_leer;
 use crate::views::view_error;
 use crate::models::utils;
 
+/// Genera un listado de artículos agrupados por categoría.
+///
+/// Esta función construye un encabezado y un vector de filas formateadas
+/// que representan cada artículo dentro de su categoría.
+///
+/// # Parámetros
+/// - `d_categorias`: Mapa de categorías (código -> nombre).
+/// - `d_articulos`: Mapa de artículos (código -> (nombre, código_categoria, precio)).
+///
+/// # Retorna
+/// Una tupla `(encabezado, filas)`:
+/// - `encabezado`: String con los títulos de las columnas formateados.
+/// - `filas`: Vector de strings con cada fila del listado, incluyendo títulos de categoría y artículos.
 
 pub fn listar_articulos_por_categoria(d_categorias: &HashMap<String, String>,d_articulos: &HashMap<String, (String, String, u32)>,titulos: Vec<&str>,) -> (String, Vec<String>) {
     let ancho_columna = 20;
@@ -34,6 +47,22 @@ pub fn listar_articulos_por_categoria(d_categorias: &HashMap<String, String>,d_a
     (encabezado, filas)
 }
 
+/// Genera un listado de documentos de entrada y salida filtrados por rango de fechas.
+///
+/// Solicita al usuario la fecha de inicio y fin, y luego construye un encabezado
+/// y un vector de filas para los documentos de entrada y salida.
+///
+/// # Parámetros
+/// - `d_entrada`: Mapa de documentos de entrada (documento -> (fecha, código_proveedor)).
+/// - `d_salida`: Mapa de documentos de salida (documento -> (fecha, cliente)).
+/// - `d_proveedores`: Mapa de proveedores (código -> (nombre, RUC, dirección, teléfono)).
+/// - `titulos_entrada`: Vector con los títulos de columnas para los documentos de entrada.
+/// - `titulos_salida`: Vector con los títulos de columnas para los documentos de salida.
+///
+/// # Retorna
+/// Una tupla `(encabezado, filas)`:
+/// - `encabezado`: String con los títulos de todas las columnas concatenadas.
+/// - `filas`: Vector de strings con cada fila del listado, incluyendo documentos de entrada y salida.
 
 pub fn listar_documentos_fechas(
     d_entrada: &HashMap<String, (String, String)>,
@@ -99,6 +128,23 @@ pub fn listar_documentos_fechas(
     (encabezado + &encabezado_salida, filas)
 }
 
+/// Genera un listado de los artículos comprados por un proveedor específico.
+///
+/// Solicita al usuario el código del proveedor, valida su existencia y luego construye
+/// un encabezado y un vector de filas con la información de los artículos comprados.
+///
+/// # Parámetros
+/// - `d_proveedores`: Mapa de proveedores (código -> (nombre, RUC, dirección, teléfono)).
+/// - `d_entrada`: Mapa de documentos de entrada (documento -> (fecha, código_proveedor)).
+/// - `d_entrada_detalle`: Detalle de los documentos de entrada
+///   (documento -> (código_artículo -> (cantidad, precio_unitario))).
+/// - `d_articulos`: Mapa de artículos (código -> (nombre, categoría, stock)).
+///
+/// # Retorna
+/// Una tupla `(encabezado, filas)`:
+/// - `encabezado`: String con los títulos de las columnas.
+/// - `filas`: Vector de strings con cada fila del listado de artículos del proveedor.
+
 pub fn listar_articulos_proveedor(
     d_proveedores: &mut HashMap<String, (String,String,String,String)>,
     d_entrada: &HashMap<String, (String, String)>,
@@ -151,7 +197,22 @@ pub fn listar_articulos_proveedor(
     (encabezado, filas)
 }
 
-
+/// Genera un listado del stock actual de artículos.
+///
+/// Calcula el stock actual restando las salidas a las entradas de cada artículo,
+/// y construye un encabezado y un vector de filas con la información.
+///
+/// # Parámetros
+/// - `d_entrada_detalle`: Detalle de documentos de entrada
+///   (documento -> (código_artículo -> (cantidad, precio_unitario))).
+/// - `d_salida_detalle`: Detalle de documentos de salida
+///   (documento -> (código_artículo -> (cantidad, precio_unitario))).
+/// - `d_articulos`: Mapa de artículos (código -> (nombre, categoría, stock)).
+///
+/// # Retorna
+/// Una tupla `(encabezado, filas)`:
+/// - `encabezado`: String con los títulos de las columnas.
+/// - `filas`: Vector de strings con cada fila del listado de stock actual.
 
 pub fn listar_stock_actual(
     d_entrada_detalle: &HashMap<String, HashMap<String, (u32, u32)>>,
@@ -198,9 +259,26 @@ pub fn listar_stock_actual(
         );
         filas.push(fila);
     }
-
     (encabezado, filas)
 }
+
+/// Genera el historial de movimientos (entradas y salidas) de un artículo específico.
+///
+/// # Parámetros
+/// - `d_articulos`: Mapa de artículos (código -> (nombre, categoría, stock)).
+/// - `d_entrada`: Documentos de entrada (código_doc -> (fecha, código_proveedor)).
+/// - `d_entrada_detalle`: Detalle de documentos de entrada
+///   (código_doc -> (código_artículo -> (cantidad, precio_unitario))).
+/// - `d_salida`: Documentos de salida (código_doc -> (fecha, nombre_cliente)).
+/// - `d_salida_detalle`: Detalle de documentos de salida
+///   (código_doc -> (código_artículo -> (cantidad, precio_unitario))).
+///
+/// # Retorna
+/// Una tupla `(encabezado, filas)`:
+/// - `encabezado`: String con los títulos de las columnas.
+/// - `filas`: Vector de strings con cada fila del historial del artículo.
+
+
 pub fn listar_historial_articulos(
     d_articulos: &mut HashMap<String, (String,String,u32)>,
     d_entrada: &mut HashMap<String, (String, String)>,
@@ -263,6 +341,19 @@ pub fn listar_historial_articulos(
     (encabezado, filas)
 }
 
+
+/// Genera un listado del valor total en stock de cada artículo.
+///
+/// # Parámetros
+/// - `d_entrada_detalle`: Detalle de documentos de entrada
+///   (código_doc -> (código_artículo -> (cantidad, precio_unitario))).
+/// - `d_salida_detalle`: Detalle de documentos de salida
+///   (código_doc -> (código_artículo -> (cantidad, precio_unitario))).
+/// - `d_articulos`: Mapa de artículos (código -> (nombre, categoría, stock)).
+///
+/// # Retorna
+/// Una tupla `(encabezado, filas)`:
+/// - `encabezado`: String con los títulos de las columnas.
 
 pub fn listar_valor_total(
     d_entrada_detalle: &HashMap<String, HashMap<String, (u32, u32)>>,

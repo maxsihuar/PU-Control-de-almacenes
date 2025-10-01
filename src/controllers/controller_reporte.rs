@@ -6,6 +6,22 @@ use crate::models::utils;
 use crate::models::services;
 use std::collections::HashMap;
 
+/// Muestra un menú interactivo de reportes del sistema.
+///
+/// Permite al usuario consultar reportes sobre categorías, artículos, proveedores,
+/// entradas, salidas y movimientos de inventario. Se ejecuta en bucle hasta que
+/// se selecciona la opción de salir (`0`).
+///
+/// # Parámetros
+/// - `d_categorias`: Categorías de artículos (código -> nombre).
+/// - `d_articulos`: Artículos (código -> (nombre, código_categoria, stock_inicial)).
+/// - `d_proveedores`: Proveedores (código -> (nombre, RUC, dirección, teléfono)).
+/// - `d_entrada`: Documentos de entrada (documento -> (fecha, código_proveedor)).
+/// - `d_entrada_detalle`: Detalle de entradas (documento -> {artículo -> (cantidad, precio)}).
+/// - `d_salida`: Documentos de salida (documento -> (fecha, cliente)).
+/// - `d_salida_detalle`: Detalle de salidas (documento -> {artículo -> (cantidad, precio)}).
+///
+
 pub fn run_reportes(
     d_categorias: &mut HashMap<String, String>,
     d_articulos: &mut HashMap<String, (String, String, u32)>,
