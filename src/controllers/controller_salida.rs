@@ -81,7 +81,7 @@ pub fn leer_datos_salida_m(dc : &mut HashMap<String, (String, String)>) -> (Stri
 /// 5. **Salir**: Finaliza la ejecución del menú.
 pub fn run_salida(dc : &mut HashMap<String, (String, String)>) {
     loop{
-        view_menu::menu_secundario("Entrada".to_string());
+        view_menu::menu_secundario("Salida".to_string());
         view_leer::mostrar_mensaje("Ingrese una opcion:");
         let opcion = utils::utils_leer::leer_u32();
         match opcion{

@@ -125,7 +125,7 @@ pub fn listar_documentos_fechas(
         }
     }
 
-    (encabezado + &encabezado_salida, filas)
+    (encabezado, filas)
 }
 
 /// Genera un listado de los artículos comprados por un proveedor específico.
@@ -157,6 +157,7 @@ pub fn listar_articulos_proveedor(
 
     // Leer código del proveedor
     let cod_prov: String = loop {
+        view_leer::mostrar_mensaje("Ingrese el codigo de un proveedor");
         let input = utils::utils_leer::leer_string();
         if !utils::utils_validaciones::validar_existencia_t2(input.clone(), d_proveedores) {
             view_error::error_no_existencia();
@@ -292,6 +293,7 @@ pub fn listar_historial_articulos(
 
     let mut cod_art:String;
     loop{
+        view_leer::mostrar_mensaje("Ingrese el codigo del articulo:");
         cod_art = utils::utils_leer::leer_string();
         if !utils::utils_validaciones::validar_existencia_t1(cod_art.clone(), d_articulos){
             view_error::error_no_existencia();
