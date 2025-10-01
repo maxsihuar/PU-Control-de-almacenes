@@ -50,7 +50,7 @@ pub fn run_articulo(dc : &HashMap<String, (String, String, u32)>) {
             1 => services::service_agregar(dc, leer_datos_articulo()),
             2 => services::service_modificar::modificar(dc,leer_datos_articulo()),
             3 => services::service_eliminar::eliminar(dc,utils::utils_leer::leer_string()),
-            4 => services::service_listar::listar(dc),
+            4 => services::service_listar::listar(dc, vec!["Codigo", "Descripcion", "Categoria", "Precio"]),
             5 => break,
             _ => println!("Opcion no valida"
             ),
