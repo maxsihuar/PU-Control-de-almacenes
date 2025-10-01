@@ -26,3 +26,13 @@ pub fn controller_error_existencia() {
 pub fn controller_error_RUC_tamaño() {
     view_error::error_RUC_tamaño();
 }
+
+/// Controlador que gestiona el error cuando la opcion ingresada no es válida.
+///
+/// # Descripción
+/// Invoca la función de la capa de **vista (`view_error`)**
+/// para mostrar el mensaje de error de "opción no válida".
+
+pub fn opcion_no_valida() {
+    view_error::view_error_opcion();
+}
