@@ -36,8 +36,8 @@ pub fn run_reportes(
         view_leer::mostrar_mensaje("Ingrese una opcion:");
         let opcion = utils::utils_leer::leer_u32();
         match opcion{
-            1 => view_listar::mostrar_listado(services::services_reportes::listar_articulos_por_categoria(d_categorias, d_articulos, vec!["Codigo Categoria", "Nombre Categoria", "Codigo Articulo", "Nombre Articulo", "Stock"])),
-            2 => view_listar::mostrar_listado(services::services_reportes::listar_documentos_fechas(d_entrada, d_salida, d_proveedores, vec!["Documento", "Fecha", "Proveedor/Clinte"],vec!["Documento", "Fecha", "Cliente"])),
+            1 => view_listar::mostrar_listado(services::services_reportes::listar_articulos_por_categoria(d_categorias, d_articulos, vec!["Codigo Categoria","Nombre Articulo", "Precio"])),
+            2 => view_listar::mostrar_listado(services::services_reportes::listar_documentos_fechas(d_entrada, d_salida, d_proveedores, vec!["Documento", "Fecha", "Proveedor"],vec!["Documento", "Fecha", "Cliente"])),
             3 => view_listar::mostrar_listado(services::services_reportes::listar_articulos_proveedor(d_proveedores, d_entrada, d_entrada_detalle, d_articulos)),
             4 => view_listar::mostrar_listado(services::services_reportes::listar_stock_actual(d_entrada_detalle, d_salida_detalle, d_articulos)),
             5 => view_listar::mostrar_listado(services::services_reportes::listar_historial_articulos(d_articulos, d_entrada, d_entrada_detalle, d_salida, d_salida_detalle)),

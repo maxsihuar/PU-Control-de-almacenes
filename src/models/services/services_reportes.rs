@@ -75,55 +75,62 @@ pub fn listar_documentos_fechas(
     let mut encabezado = String::new();
     let mut filas: Vec<String> = Vec::new();
 
-    view_leer::mostrar_mensaje("Ingrese la fecha de inicio (YYYY-MM-DD):");
+    view_leer::mostrar_mensaje("Ingrese la fecha de inicio (DD-MM-YYYY):");
     let fecha_inicio: String = utils::utils_leer::leer_string();
 
-    view_leer::mostrar_mensaje("Ingrese la fecha de fin (YYYY-MM-DD):");
+    view_leer::mostrar_mensaje("Ingrese la fecha de fin (DD-MM-YYYY):");
     let fecha_fin: String = utils::utils_leer::leer_string();
 
-    // Encabezado de entrada
-    for titulo in &titulos_entrada {
-        encabezado.push_str(&format!("{:<width$}", titulo, width = ancho_columna));
-    }
+    view_leer::mostrar_mensaje("Entrada o Salida:");
+    let op : String = utils::utils_leer::leer_string();
 
-    filas.push("Documentos de Entrada:".to_string());
-    filas.push("-".repeat(ancho_columna * titulos_entrada.len()));
+    if op == "Entrada"{
+        // Encabezado de entrada
+        for titulo in &titulos_entrada {
+            encabezado.push_str(&format!("{:<width$}", titulo, width = ancho_columna));
+        }
+       
 
-    let default_val = ("Desconocido".to_string(), "".to_string(), "".to_string(), "".to_string());
+        filas.push("Documentos de Entrada:".to_string());
+        filas.push("-".repeat(ancho_columna * titulos_entrada.len()));
 
-    for (doc, (fecha, cod_prov)) in d_entrada {
-        if fecha_inicio <= *fecha && *fecha <= fecha_fin {
-            let proveedor = d_proveedores.get(cod_prov).unwrap_or(&default_val);
-            let fila = format!(
-                "{:<width$}{:<width$}{:<width$}",
-                doc, fecha, proveedor.0,
-                width = ancho_columna
-            );
-            filas.push(fila);
+        let default_val = ("Desconocido".to_string(), "".to_string(), "".to_string(), "".to_string());
+
+        for (doc, (fecha, cod_prov)) in d_entrada {
+            if fecha_inicio <= *fecha && *fecha <= fecha_fin {
+                let proveedor = d_proveedores.get(cod_prov).unwrap_or(&default_val);
+                let fila = format!(
+                    "{:<width$}{:<width$}{:<width$}",
+                    doc, fecha, proveedor.0,
+                    width = ancho_columna
+                );
+                filas.push(fila);
+            }
+        }
+    }else{
+        // Encabezado de salida
+        for titulo in &titulos_salida {
+            encabezado.push_str(&format!("{:<width$}", titulo, width = ancho_columna));
+        }
+
+        filas.push("Documentos de Salida:".to_string());
+        filas.push("-".repeat(ancho_columna * titulos_salida.len()));
+
+        for (doc, (fecha, nombre)) in d_salida {
+            if fecha_inicio <= *fecha && *fecha <= fecha_fin {
+                let fila = format!(
+                    "{:<width$}{:<width$}{:<width$}",
+                    doc, fecha, nombre,
+                    width = ancho_columna
+                );
+                filas.push(fila);
+            }
         }
     }
 
-    filas.push(String::new()); // separación
 
-    // Encabezado de salida
-    let mut encabezado_salida = String::new();
-    for titulo in &titulos_salida {
-        encabezado_salida.push_str(&format!("{:<width$}", titulo, width = ancho_columna));
-    }
 
-    filas.push("Documentos de Salida:".to_string());
-    filas.push("-".repeat(ancho_columna * titulos_salida.len()));
 
-    for (doc, (fecha, nombre)) in d_salida {
-        if fecha_inicio <= *fecha && *fecha <= fecha_fin {
-            let fila = format!(
-                "{:<width$}{:<width$}{:<width$}",
-                doc, fecha, nombre,
-                width = ancho_columna
-            );
-            filas.push(fila);
-        }
-    }
 
     (encabezado, filas)
 }
@@ -254,7 +261,7 @@ pub fn listar_stock_actual(
         let fila = format!(
             "{:<width$}{:<width$}{:<width$}",
             cod_art,
-            nom_art.0, // solo el nombre del artículo
+            nom_art.0,
             cantidad,
             width = ancho_columna
         );
@@ -396,7 +403,7 @@ pub fn listar_valor_total(
         let fila = format!(
             "{:<width$}{:<width$}{:<width$.2}",
             cod_art,
-            nom_art.0, // solo el nombre del artículo
+            nom_art.0,
             valor,
             width = ancho_columna
         );

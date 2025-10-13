@@ -29,7 +29,7 @@ pub fn menu_principal(){
     println!("7. Detalles de Salida");
     println!("8. Reportes");
     println!("0. Salir");
-} 
+}
 /// Muestra un menú secundario genérico con opciones de gestión.
 ///
 /// Este menú se utiliza para operaciones comunes como
@@ -60,10 +60,11 @@ pub fn menu_secundario_r(texto: String){
     let texto_final: String = base.to_string() + &texto;
     println!("---{}---",texto_final);
     println!("1: Listado de artículos por categoría");
-    println!("2: Listado de documentos de entrada y salida por fecha");
+    println!("2: Listado de documentos de entrada o salida por fecha");
     println!("3: Mostrar artículos comprados a un proveedor");
     println!("4: Mostrar el stock actual de artículos en el almacén");
     println!("5: Historial de movimientos de un artículo");
     println!("6: Valor en stock de cada artículo");
     println!("0: Salir");                                            
 }
+
