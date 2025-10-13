@@ -49,7 +49,7 @@ pub fn test_articulo() -> HashMap<String, (String, String, u32)>{
     d_articulos.insert("ME22".to_string(), ("Mesa de Centro".to_string(), "MO".to_string(), 1500));
     d_articulos.insert("LB33".to_string(), ("Lámpara de Pie".to_string(), "MO".to_string(), 300));
 
-    d_articulos.insert("AC12".to_string(), ("Aire Acondicionado Daikin 12BTU".to_string(), "CL".to_string(), 3200));
+    d_articulos.insert("AC12".to_string(), ("Aire Acondicionado Daikin 12BTU".to_string(), "CL".to_string(), 3000));
     d_articulos.insert("VC05".to_string(), ("Ventilador Oster".to_string(), "CL".to_string(), 350));
     d_articulos.insert("HC15".to_string(), ("Humidificador Philips".to_string(), "CL".to_string(), 700));
     d_articulos.insert("DE40".to_string(), ("Deshumidificador LG".to_string(), "CL".to_string(), 1200));
@@ -83,7 +83,7 @@ pub fn test_entrada_detalle() -> HashMap<String, HashMap<String, (u32, u32)>>{
         ("I010".to_string(), (3, 1200))
     ]));
     d_entrada_detalle.insert("PI-12346".to_string(), HashMap::from([
-        ("R045".to_string(), (1, 4300)),
+        ("R045".to_string(), (1, 4000)),
         ("A015".to_string(), (5, 1000))
     ]));
     d_entrada_detalle.insert("PI-12347".to_string(), HashMap::from([
@@ -96,7 +96,7 @@ pub fn test_entrada_detalle() -> HashMap<String, HashMap<String, (u32, u32)>>{
         ("VC05".to_string(), (10, 370))
     ]));
     d_entrada_detalle.insert("PI-12349".to_string(), HashMap::from([
-        ("AC12".to_string(), (2, 3300)),
+        ("AC12".to_string(), (2, 3000)),
         ("BL01".to_string(), (6, 420))
     ]));
     d_entrada_detalle.insert("PI-12350".to_string(), HashMap::from([
@@ -132,13 +132,13 @@ pub fn test_entrada_detalle() -> HashMap<String, HashMap<String, (u32, u32)>>{
     ]));
 
     d_entrada_detalle.insert("PI-12355".to_string(), HashMap::from([
-        ("AC12".to_string(), (2, 3300)),
+        ("AC12".to_string(), (2, 3000)),
         ("BL01".to_string(), (2, 420)),
         ("MJ22".to_string(), (1, 1800))  // Mezcladora KitchenAid (nuevo)
     ]));
 
     d_entrada_detalle.insert("PI-12356".to_string(), HashMap::from([
-        ("AC12".to_string(), (1, 310)),
+        ("AC12".to_string(), (1, 3000)),
         ("PR01".to_string(), (10, 2900))
     ]));
 
@@ -198,11 +198,11 @@ pub fn test_salida_detalle() -> HashMap<String, HashMap<String, (u32, u32)>>{
     ]));
     d_salida_detalle.insert("NS-45681".to_string(), HashMap::from([
         ("VC05".to_string(), (2, 400)),
-        ("R045".to_string(), (1, 4500)),
+        ("R045".to_string(), (1, 4000)),
         ("PR01".to_string(), (4, 2800))
     ]));
     d_salida_detalle.insert("NS-45682".to_string(), HashMap::from([
-        ("AC12".to_string(), (1, 3500)),
+        ("AC12".to_string(), (1, 3000)),
         ("OL10".to_string(), (2, 350)),
         ("L025".to_string(), (1, 3200)),
         ("TV75".to_string(), (1, 4800)),  // Televisor Samsung 75
@@ -216,7 +216,7 @@ pub fn test_salida_detalle() -> HashMap<String, HashMap<String, (u32, u32)>>{
     ]));
 
     d_salida_detalle.insert("NS-45684".to_string(), HashMap::from([
-        ("AC12".to_string(), (4, 3500)),
+        ("AC12".to_string(), (4, 3000)),
         ("OL10".to_string(), (2, 350)),
         ("L025".to_string(), (1, 3200)),
         ("H020".to_string(), (2, 1200)),  // Headphones Bose
