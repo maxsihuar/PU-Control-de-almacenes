@@ -64,10 +64,16 @@ pub fn view_error_opcion() {
     println!("********************************************");
     utils_view::pausar();
 }
+
+/// Muestra un mensaje de error cuando el stock de un producto es insuficiente.
+///
+/// # Descripción
+/// Limpia la pantalla, imprime el mensaje enmarcado de error
+/// y pausa la ejecución.
 pub fn error_stock_insuficiente(){
     utils_view::limpiar_pantalla();
     println!("********************************************");
-    println!("*         ERROR: STOCK INSUFICIENTE          *");
+    println!("*         ERROR: STOCK INSUFICIENTE        *");
     println!("********************************************");
     utils_view::pausar();
 }

@@ -79,7 +79,7 @@ pub fn proveedor() -> HashMap<String, (String, String, String, String)>{
 pub fn test_entrada_detalle() -> HashMap<String, HashMap<String, (u32, u32)>>{
     let mut d_entrada_detalle: HashMap<String, HashMap<String, (u32, u32)>> = HashMap::new();
     d_entrada_detalle.insert("PI-12345".to_string(), HashMap::from([
-        ("L025".to_string(), (2, 3000)),
+        ("L025".to_string(), (4, 3000)),
         ("I010".to_string(), (3, 1200))
     ]));
     d_entrada_detalle.insert("PI-12346".to_string(), HashMap::from([
@@ -126,7 +126,7 @@ pub fn test_entrada_detalle() -> HashMap<String, HashMap<String, (u32, u32)>>{
     ]));
 
     d_entrada_detalle.insert("PI-12354".to_string(), HashMap::from([
-        ("BL01".to_string(), (3, 2600)),
+        ("TV32".to_string(), (3, 700)),
         ("VC05".to_string(), (3, 370)),
         ("H020".to_string(), (2, 1200))  // Headphones Bose (nuevo)
     ]));
@@ -218,7 +218,7 @@ pub fn test_salida_detalle() -> HashMap<String, HashMap<String, (u32, u32)>>{
     d_salida_detalle.insert("NS-45684".to_string(), HashMap::from([
         ("AC12".to_string(), (4, 3500)),
         ("OL10".to_string(), (2, 350)),
-        ("L025".to_string(), (3, 3200)),
+        ("L025".to_string(), (1, 3200)),
         ("H020".to_string(), (2, 1200)),  // Headphones Bose
     ]));
 

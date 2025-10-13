@@ -46,10 +46,10 @@ pub fn leer_datos_detalle_salida(dc: &mut HashMap<String, HashMap<String, (u32, 
         loop {
             view_leer::mostrar_mensaje("Ingrese la cantidad del articulo:");
             cantidad = utils::utils_leer::leer_u32();
-            if utils::utils_validaciones::validar_stock(dc, codigo_articulo, cantidad){
+            if utils::utils_validaciones::validar_stock(dc,dc_detalle_entrada, codigo_articulo.clone(), cantidad){
                 break;
             }else {
-                view_error::error_stock();
+                view_error::error_stock_insuficiente();
             }
         }
         view_leer::mostrar_mensaje("Ingrese el precio del articulo:");
@@ -83,10 +83,10 @@ pub fn leer_datos_detalle_salida_m(dc: &mut HashMap<String, HashMap<String, (u32
         loop {
             view_leer::mostrar_mensaje("Ingrese la cantidad del articulo:");
             cantidad = utils::utils_leer::leer_u32();
-            if utils::utils_validaciones::validar_stock(dc, codigo_articulo, cantidad){
+            if utils::utils_validaciones::validar_stock(dc,dc_detalle_entrada, codigo_articulo.clone(), cantidad){
                 break;
             }else {
-                view_error::error_stock();
+                view_error::error_stock_insuficiente();
             }
         }
         view_leer::mostrar_mensaje("Ingrese el precio del articulo:");

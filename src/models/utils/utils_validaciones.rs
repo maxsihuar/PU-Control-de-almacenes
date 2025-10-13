@@ -90,13 +90,44 @@ pub fn validar_DNI(dni: String, dc: &HashMap<String, (String, String)>) -> bool 
     true
 }
 
-pub fn validar_stock(dc: &mut HashMap<String, HashMap<String,(u32,u32)>>,cod_arti:String,cantidad:u32) -> bool{
+/// Verifica si existe suficiente stock disponible de un artículo en base a los
+/// registros de entradas (`dc`) y salidas (`dc_s`).
+///
+/// # Parámetros
+/// - `dc_s`: Mapa que representa las **salidas** de artículos.  
+///   Estructura: `HashMap<CódigoSalida, HashMap<CódigoArticulo, (cantidad, precio)>>`
+///
+/// - `dc`: Mapa que representa las **entradas** de artículos.  
+///   Estructura: `HashMap<CódigoEntrada, HashMap<CódigoArticulo, (cantidad, precio)>>`
+///
+/// - `cod_arti`: Código del artículo que se desea verificar (por ejemplo, `"TV32"`).  
+///
+/// - `cantidad`: Cantidad solicitada del artículo que se desea validar.
+///
+/// # Retorno
+/// - `true` → si el stock actual es **mayor o igual** a la cantidad solicitada.  
+/// - `false` → si el stock actual es **insuficiente**.
+
+pub fn validar_stock(dc_s:&mut HashMap<String,HashMap<String,(u32,u32)>>,dc: &mut HashMap<String, HashMap<String,(u32,u32)>>,cod_arti:String,cantidad:u32) -> bool{
+    let mut stock:i32 = 0;
+    
     for (_codigo,m) in dc{
         for (_cod_art,(cnt,precio)) in m{
-            if cod_arti == *_cod_art && cantidad <=*cnt{
-                return true
+            if cod_arti == *_cod_art{
+                stock += *cnt as i32;
             }
         }
     }
-    return false;
+    for (_codigo,m) in dc_s{
+        for (_cod_art,(cnt,precio)) in m{
+            if cod_arti == *_cod_art{
+               stock -= *cnt as i32;
+            }
+        }
+    }
+    if stock >= cantidad as i32{
+        return true;
+    }else{
+        return false;
+    }
 }
