@@ -14,6 +14,7 @@ pub fn leer_string() -> String {
 }
 
 
+
 /// Lee un valor numérico de tipo `u32` desde la entrada estándar.
 ///
 /// La función solicita al usuario un número hasta que ingrese un valor válido.
