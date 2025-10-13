@@ -64,3 +64,10 @@ pub fn view_error_opcion() {
     println!("********************************************");
     utils_view::pausar();
 }
+pub fn error_stock_insuficiente(){
+    utils_view::limpiar_pantalla();
+    println!("********************************************");
+    println!("*         ERROR: STOCK INSUFICIENTE          *");
+    println!("********************************************");
+    utils_view::pausar();
+}

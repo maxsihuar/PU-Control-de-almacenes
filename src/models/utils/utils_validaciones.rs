@@ -89,11 +89,3 @@ pub fn validar_DNI(dni: String, dc: &HashMap<String, (String, String)>) -> bool 
 
     true
 }
-pub fn validar_stock(codigo: &String, cantidad: u32, dc: &mut HashMap<String, (String, String, u32)>) -> bool {
-    if let Some((_nombre, _categoria, stock)) = dc.get(codigo) {
-        if *stock >= cantidad {
-            return true;
-        }
-    }
-    false
-}
