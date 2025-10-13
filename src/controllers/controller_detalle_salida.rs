@@ -22,7 +22,7 @@ use std::collections::HashMap;
 ///    - Se solicita el precio.
 /// 4. Se construye un `HashMap` con todos los artículos registrados.
 /// 5. Se retorna la tupla `(codigo, diccionario_articulos)`.
-pub fn leer_datos_detalle_salida(dc: &mut HashMap<String, HashMap<String, (u32, u32)>>) -> (String, HashMap<String, (u32,u32)>) {
+pub fn leer_datos_detalle_salida(dc: &mut HashMap<String, HashMap<String, (u32, u32)>>, dc_detalle_entrada : &mut HashMap<String, HashMap<String, (u32,u32)>>) -> (String, HashMap<String, (u32,u32)>) {
     let mut codigo:String;
     loop{
         view_leer::mostrar_titulo("INGRESE EL CODIGO DEL DETALLE DE LA SALIDA");
@@ -42,8 +42,16 @@ pub fn leer_datos_detalle_salida(dc: &mut HashMap<String, HashMap<String, (u32, 
     for _i in 0..n {
         view_leer::mostrar_mensaje("Ingrese el codigo del articulo:");
         let codigo_articulo = utils::utils_leer::leer_string();
-        view_leer::mostrar_mensaje("Ingrese la cantidad del articulo:");
-        let cantidad = utils::utils_leer::leer_u32();
+                let mut cantidad : u32;
+        loop {
+            view_leer::mostrar_mensaje("Ingrese la cantidad del articulo:");
+            cantidad = utils::utils_leer::leer_u32();
+            if utils::utils_validaciones::validar_stock(dc, codigo_articulo, cantidad){
+                break;
+            }else {
+                view_error::error_stock();
+            }
+        }
         view_leer::mostrar_mensaje("Ingrese el precio del articulo:");
         let precio = utils::utils_leer::leer_u32();
         dictemp.insert(codigo_articulo, (cantidad,precio));
@@ -51,7 +59,7 @@ pub fn leer_datos_detalle_salida(dc: &mut HashMap<String, HashMap<String, (u32, 
     return (codigo, dictemp);
 }
 
-pub fn leer_datos_detalle_salida_m(dc: &mut HashMap<String, HashMap<String, (u32, u32)>>) -> (String, HashMap<String, (u32,u32)>) {
+pub fn leer_datos_detalle_salida_m(dc: &mut HashMap<String, HashMap<String, (u32, u32)>>, dc_detalle_entrada : &mut HashMap<String, HashMap<String, (u32,u32)>>) -> (String, HashMap<String, (u32,u32)>) {
     let mut codigo:String;
     loop{
         view_leer::mostrar_titulo("INGRESE EL CODIGO DEL DETALLE DE LA SALIDA");
@@ -71,8 +79,16 @@ pub fn leer_datos_detalle_salida_m(dc: &mut HashMap<String, HashMap<String, (u32
     for _i in 0..n {
         view_leer::mostrar_mensaje("Ingrese el codigo del articulo:");
         let codigo_articulo = utils::utils_leer::leer_string();
-        view_leer::mostrar_mensaje("Ingrese la cantidad del articulo:");
-        let cantidad = utils::utils_leer::leer_u32();
+        let mut cantidad : u32;
+        loop {
+            view_leer::mostrar_mensaje("Ingrese la cantidad del articulo:");
+            cantidad = utils::utils_leer::leer_u32();
+            if utils::utils_validaciones::validar_stock(dc, codigo_articulo, cantidad){
+                break;
+            }else {
+                view_error::error_stock();
+            }
+        }
         view_leer::mostrar_mensaje("Ingrese el precio del articulo:");
         let precio = utils::utils_leer::leer_u32();
         dictemp.insert(codigo_articulo, (cantidad,precio));
@@ -98,14 +114,14 @@ pub fn leer_datos_detalle_salida_m(dc: &mut HashMap<String, HashMap<String, (u32
 ///
 /// # Parámetros
 /// - `dc`: Referencia mutable al `HashMap` que contiene los detalles de salida.
-pub fn run_detalle_salida(dc: &mut HashMap<String, HashMap<String, (u32, u32)>>){
+pub fn run_detalle_salida(dc: &mut HashMap<String, HashMap<String, (u32, u32)>>, dc_detalle_entrada : &mut HashMap<String, HashMap<String, (u32,u32)>>){
     loop{
         view_menu::menu_secundario("Detalles de Salida".to_string());
         view_leer::mostrar_mensaje("Ingrese una opcion:");
         let opcion = utils::utils_leer::leer_u32();
         match opcion{
-            1 => services::services_agregar::agregar_h(dc, leer_datos_detalle_salida),
-            2 => services::services_modificar::modificar_h(dc,leer_datos_detalle_salida_m),
+            1 => services::services_agregar::agregar_h_s(dc,dc_detalle_entrada,leer_datos_detalle_salida),
+            2 => services::services_modificar::modificar_h_s(dc,dc_detalle_entrada,leer_datos_detalle_salida_m),
             3 => services::services_eliminar::eliminar_h(dc,utils::utils_leer::leer_string()),
             4 => view_listar::mostrar_listado(services::services_listar::listar_h(dc, vec!["Codigo", "Codigo Articulo", "Cantidad", "Precio"])),
             5 => break,

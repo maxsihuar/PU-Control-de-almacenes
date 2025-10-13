@@ -37,8 +37,17 @@ pub fn leer_datos_proveedores(dc: &mut HashMap<String, (String, String, String, 
 
     view_leer::mostrar_mensaje("Ingrese la razón social del proveedor:");
     let rs = utils::utils_leer::leer_string();
-    view_leer::mostrar_mensaje("Ingrese el RUC del proveedor:");
-    let ruc = utils::utils_leer::leer_string();
+    let mut ruc:String;
+    loop {
+        view_leer::mostrar_mensaje("Ingrese el RUC del proveedor:");
+        ruc = utils::utils_leer::leer_string();
+        if  utils::utils_validaciones::validar_RUC(ruc.clone(), dc){
+            break;
+        }else{
+             view_error::error_RUC_existencia();
+        }
+
+    }
     view_leer::mostrar_mensaje("Ingrese la dirección del proveedor:");
     let direccion = utils::utils_leer::leer_string();
     view_leer::mostrar_mensaje("Ingrese la ciudad del proveedor:");
@@ -61,8 +70,18 @@ pub fn leer_datos_proveedores_m(dc: &mut HashMap<String, (String, String, String
 
     view_leer::mostrar_mensaje("Ingrese la razón social del proveedor:");
     let rs = utils::utils_leer::leer_string();
-    view_leer::mostrar_mensaje("Ingrese el RUC del proveedor:");
-    let ruc = utils::utils_leer::leer_string();
+    let mut ruc:String;
+    loop {
+        view_leer::mostrar_mensaje("Ingrese el RUC del proveedor:");
+        ruc = utils::utils_leer::leer_string();
+        if  utils::utils_validaciones::validar_RUC(ruc.clone(), dc){
+            break;
+        }else{
+             view_error::error_RUC_existencia();
+        }
+
+    }
+
     view_leer::mostrar_mensaje("Ingrese la dirección del proveedor:");
     let direccion = utils::utils_leer::leer_string();
     view_leer::mostrar_mensaje("Ingrese la ciudad del proveedor:");

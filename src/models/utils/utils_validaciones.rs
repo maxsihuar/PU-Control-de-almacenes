@@ -89,3 +89,14 @@ pub fn validar_DNI(dni: String, dc: &HashMap<String, (String, String)>) -> bool 
 
     true
 }
+
+pub fn validar_stock(dc: &mut HashMap<String, HashMap<String,(u32,u32)>>,cod_arti:String,cantidad:u32) -> bool{
+    for (_codigo,m) in dc{
+        for (_cod_art,(cnt,precio)) in m{
+            if cod_arti == *_cod_art && cantidad <=*cnt{
+                return true
+            }
+        }
+    }
+    return false;
+}

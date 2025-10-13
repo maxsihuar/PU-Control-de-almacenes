@@ -43,7 +43,7 @@ pub fn run(){
             4 => controllers::controller_entrada::run_entrada(&mut dc_entrada),
             5 => controllers::controller_detalle_entrada::run_detalle_entrada(&mut dc_detalle_entrada),
             6 => controllers::controller_salida::run_salida(&mut dc_salida),
-            7 => controllers::controller_detalle_salida::run_detalle_salida(&mut dc_detalle_salida),
+            7 => controllers::controller_detalle_salida::run_detalle_salida(&mut dc_detalle_salida, &mut dc_detalle_entrada),
             8 => controllers::controller_reporte::run_reportes(&mut dc_categorias, &mut dc_articulos, &mut dc_proveedor, &mut dc_entrada,&mut dc_detalle_entrada,&mut  dc_salida,&mut dc_detalle_salida),
             0 => break,
             _ => controller_error::opcion_no_valida(),

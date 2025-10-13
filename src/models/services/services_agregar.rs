@@ -30,8 +30,18 @@ pub fn agregar_t3(dc: &mut HashMap<String,(String,String)>, leer : fn(dc: &mut H
 }
 
 //Detalle Entrada y Detalle Salida
-pub fn agregar_h(dc: &mut HashMap<String, HashMap<String,(u32,u32)>>, leer : fn(dc: &mut HashMap<String, HashMap<String,(u32,u32)>>) -> (String,HashMap<String,(u32,u32)>)){
+
+pub fn agregar_h_e(dc: &mut HashMap<String, HashMap<String,(u32,u32)>>, leer : fn(dc: &mut HashMap<String, HashMap<String,(u32,u32)>>) -> (String,HashMap<String,(u32,u32)>)){
+
     let clave_valor = leer(dc);
     dc.insert(clave_valor.0, clave_valor.1);
 }
+
+//Detalle Entrada y Detalle Salida
+pub fn agregar_h_s(dc: &mut HashMap<String, HashMap<String,(u32,u32)>>,dc_detalle_e: &mut HashMap<String,HashMap<String,(u32,u32)>>, leer : fn(dc: &mut HashMap<String, HashMap<String,(u32,u32)>>, dc_detalle_e: &mut HashMap<String,HashMap<String,(u32,u32)>>) -> (String,HashMap<String,(u32,u32)>)){
+
+    let clave_valor = leer(dc,dc_detalle_e);
+    dc.insert(clave_valor.0, clave_valor.1);
+}
+
 

@@ -100,8 +100,8 @@ pub fn run_detalle_entrada(dc: &mut HashMap<String, HashMap<String, (u32, u32)>>
         view_leer::mostrar_mensaje("Ingrese una opcion:");
         let opcion = utils::utils_leer::leer_u32();
         match opcion{
-            1 => services::services_agregar::agregar_h(dc, leer_datos_detalle_entrada),
-            2 => services::services_modificar::modificar_h(dc,leer_datos_detalle_entrada_m),
+            1 => services::services_agregar::agregar_h_e(dc, leer_datos_detalle_entrada),
+            2 => services::services_modificar::modificar_h_e(dc,leer_datos_detalle_entrada_m),
             3 => services::services_eliminar::eliminar_h(dc,utils::utils_leer::leer_string()),
             4 => view_listar::mostrar_listado(services::services_listar::listar_h(dc, vec!["Codigo", "Codigo Articulo", "Cantidad", "Precio"])),
             5 => break,
