@@ -88,7 +88,7 @@ pub fn run_salida(dc : &mut HashMap<String, (String, String)>) {
             1 => services::services_agregar::agregar_t3(dc,leer_datos_salida),
             2 => services::services_modificar::modificar_t3(dc,leer_datos_salida_m),
             3 => services::services_eliminar::eliminar_t3(dc,utils::utils_leer::leer_string()),
-            4 => view_listar::mostrar_listado(services::services_listar::listar_t3(dc, vec!["Codigo", "Cliente", "Fecha"])),
+            4 => view_listar::mostrar_listado(services::services_listar::listar_t3(dc, vec!["Codigo", "Fecha", "Cliente"])),
             5 => break,
             _ => println!("Opcion no valida"
             ),
